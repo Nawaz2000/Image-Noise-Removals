@@ -1,5 +1,5 @@
 ori_img = imread('cameraman.tif');
-gauss_img = imnoise(ori_img,'gaussian',0,0.005);
+gauss_img = imnoise(ori_img,'gaussian',0,0.01);
 poisson_img = imnoise(ori_img,'poisson');
 
 spec_img = imnoise(ori_img,'speckle', 0.04);
@@ -17,12 +17,11 @@ imshowpair(snp_img, L3, 'montage');title('Effect of min max filter on salt and p
 figure;
 imshowpair(spec_img, L4, 'montage');title('Effect of min max filter on salt and speckle noise');
 
-peaksnr1 = psnr(ori_img,gauss_img);
+peaksnr1 = psnr(ori_img,L1);
 fprintf('\n The Peak-SNR value on Gaussian noise is %0.4f', peaksnr1);
-peaksnr2 = psnr(ori_img,poisson_img);
+peaksnr2 = psnr(ori_img,L2);
 fprintf('\n The Peak-SNR value on Poisson noise is %0.4f', peaksnr2);
-peaksnr3 = psnr(ori_img,snp_img);
+peaksnr3 = psnr(ori_img, L3);
 fprintf('\n The Peak-SNR value on Salt & Pepper noise is %0.4f', peaksnr3);
-peaksnr4 = psnr(ori_img,spec_img);
+peaksnr4 = psnr(ori_img,L4);
 fprintf('\n The Peak-SNR value on Speckle noise is %0.4f', peaksnr4);
-
